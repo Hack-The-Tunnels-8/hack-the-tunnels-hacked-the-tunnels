@@ -1,14 +1,25 @@
 .product-preview-card {
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+
   &__title {
     font-style: bold;
-    color: green;
+    color: black;
   }
 
   &__description {
-    color: blue;
+    color: grey;
   }
 
   &__image {
     width: 10rem;
+  }
+
+  &__price {
+    color: red;
+    font-size: 22px;
   }
 }
