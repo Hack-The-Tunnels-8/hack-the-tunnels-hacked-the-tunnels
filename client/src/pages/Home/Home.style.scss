@@ -5,8 +5,10 @@
 
   &__products {
     display: flex;
-    flex-direction: column;
-
+    flex-direction: row;
+    flex-wrap: wrap; /* This enables the responsive wrapping */
+    gap: 20px; /* Set the gap between items */
+    
     a {
       text-decoration: none;
       color: inherit;
