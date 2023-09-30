@@ -15,3 +15,34 @@
     }
   }
 }
+/* Apply the typewriter animation to your <p> tag */
+.typewriter {
+  white-space: nowrap; /* Prevent text from wrapping */
+  overflow: hidden; /* Hide overflowing text */
+  border-right: 3px solid #333; /* Create a typing cursor effect */
+  animation: typing 5s steps(30, end), blink .75s step-end infinite;
+  white-space: nowrap;
+  font-size: 30px;
+  font-weight: 700;
+  border-right: 4px solid rgb(255, 255, 255);
+  box-sizing: border-box;
+  display: inline-block;
+}
+
+@keyframes typing {
+  from { 
+      width: 0% 
+  }
+  to { 
+      width: 100% 
+  }
+}
+
+@keyframes blink {
+  from, to { 
+      border-color: transparent 
+  }
+  50% { 
+      border-color: rgb(255, 255, 255); 
+  }
+}
