@@ -3,9 +3,12 @@ import { Link } from "react-router-dom";
 import { Page, ProductPreviewCard } from "../../components";
 import { ServiceAPI } from "../../infrastructure";
 import "./Home.style.scss";
+import { useCookies } from 'react-cookie';
 
 function Home() {
   const [products, setProducts] = useState([]);
+  const [cookies] = useCookies();
+  const recentlyViewedProducts = cookies.recentlyViewed || [];
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,6 +39,22 @@ function Home() {
           ))}
         </div>
       </div>
+      <section>
+        <h2>Recently Viewed Products</h2>
+        <div className="home-page__products">
+        {recentlyViewedProducts.map((productName) => (
+            <Link to={`/products/${productName.id}`} key={`${productName.id}`}>
+              <ProductPreviewCard
+                title={productName.title}
+                description={productName.description}
+                price={productName.price}
+                imageUrl={productName.imageUrl}
+                key={`${productName.id}`}
+              />
+            </Link>
+        ))}
+        </div>  
+      </section>
     </Page>
   );
 }
