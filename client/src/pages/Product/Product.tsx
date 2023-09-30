@@ -3,11 +3,13 @@ import { Link, useParams } from "react-router-dom";
 import { Page } from "../../components";
 import { ServiceAPI } from "../../infrastructure";
 import "./Product.style.scss";
+import { useCookies } from 'react-cookie';
 
 function Product() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [message, setMessage] = useState(null);
+  const [cookies, setCookie] = useCookies();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -16,7 +18,14 @@ function Product() {
         setMessage(json.error);
         return;
       }
-
+      const recentlyViewedProductNames = cookies.recentlyViewedNames || [];
+      if (!recentlyViewedProductNames.includes(json.data.product.title)) {
+        const recentlyViewedProducts = cookies.recentlyViewed || [];
+        const updatedRecentlyViewed = [...recentlyViewedProducts, json.data.product];
+        setCookie('recentlyViewed', updatedRecentlyViewed, { path: '/' });
+        const updateRecentlyViewedProductNames = [...recentlyViewedProductNames, json.data.product.title];
+        setCookie('recentlyViewedNames', updateRecentlyViewedProductNames, { path: '/' });
+      }
       setProduct(json.data.product);
     };
 
